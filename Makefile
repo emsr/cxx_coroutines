@@ -4,6 +4,11 @@ CXX = $(HOME)/bin_coroutines/bin/g++ -std=c++17 -fcoroutines -g -I$(HOME)/gcc_co
 all: \
   co-ret-void-is-ready \
   co-ret-void-is-suspend \
+  co-ret-3 \
+  co-ret-4 \
+  co-ret-5 \
+  co-ret-6 \
+  co-ret-7 \
   coro-auto-fn \
   coro-await-context-auto-fn \
   coro-builtins \
@@ -19,6 +24,21 @@ co-ret-void-is-ready: co-ret-void-is-ready.C
 
 co-ret-void-is-suspend: co-ret-void-is-suspend.C
 	$(CXX) -o co-ret-void-is-suspend co-ret-void-is-suspend.C
+
+co-ret-3: co-ret-3.C
+	$(CXX) -o co-ret-3 co-ret-3.C
+
+co-ret-4: co-ret-4.C
+	$(CXX) -o co-ret-4 co-ret-4.C
+
+co-ret-5: co-ret-5.C
+	$(CXX) -o co-ret-5 co-ret-5.C
+
+co-ret-6: co-ret-6.C
+	$(CXX) -o co-ret-6 co-ret-6.C
+
+co-ret-7: co-ret-7.C
+	$(CXX) -o co-ret-7 co-ret-7.C
 
 coro-auto-fn: coro-auto-fn.C
 	$(CXX) -fsyntax-only -w coro-auto-fn.C

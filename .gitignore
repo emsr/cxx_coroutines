@@ -1,5 +1,10 @@
 
 co-ret-void-is-ready
 co-ret-void-is-suspend
+co-ret-3
+co-ret-4
+co-ret-5
+co-ret-6
+co-ret-7
 
 coro-pre-proc.o
