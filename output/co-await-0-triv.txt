@@ -1,0 +1,4 @@
+Created coro1 object from handle
+Moved coro1
+main: done
+Destroyed coro1

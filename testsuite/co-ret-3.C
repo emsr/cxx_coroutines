@@ -4,9 +4,11 @@
 # include <utility>
 namespace coro = std::experimental::coroutines_v1;
 #else
-# include "coro.h"
+# include "../coro.h"
 namespace coro = std::experimental::coroutines_n4775;
 #endif
+
+// GRO differs from the eventual return type.
 
 /* just to avoid cluttering dump files. */
 extern "C" int puts (const char *);
@@ -58,14 +60,13 @@ struct coro1 {
   void await_resume() const noexcept { PRINT ("susp-always-resume");}
   };
 
-
   struct promise_type {
   promise_type() {  PRINT ("Created Promise"); }
   ~promise_type() { PRINT ("Destroyed Promise"); }
 
-  coro1 get_return_object () {
-    PRINT ("get_return_object: from handle from promise");
-    return coro1 (handle_type::from_promise (*this));
+  auto get_return_object () {
+    PRINT ("get_return_object: handle from promise");
+    return handle_type::from_promise (*this);
   }
   auto initial_suspend () {
     PRINT ("get initial_suspend (always)");

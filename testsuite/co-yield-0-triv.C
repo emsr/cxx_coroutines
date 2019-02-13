@@ -1,14 +1,13 @@
-//  { dg-do run }
 #if __clang__
 # include <experimental/coroutine>
 # include <utility>
 namespace coro = std::experimental::coroutines_v1;
 #else
-# include "coro.h"
+# include "../coro.h"
 namespace coro = std::experimental::coroutines_n4775;
 #endif
 
-// Test returning a T.
+// Test returning an int.
 // We will use the promise to contain this to avoid having to include
 // additional C++ headers.
 
@@ -16,8 +15,6 @@ namespace coro = std::experimental::coroutines_n4775;
 extern "C" int puts (const char *);
 extern "C" int printf (const char *, ...);
 extern "C" void abort (void) __attribute__((__noreturn__));
-
-//#define BROKEN
 
 #ifndef OUTPUT
 #  define PRINT(X)
@@ -27,23 +24,6 @@ extern "C" void abort (void) __attribute__((__noreturn__));
 #  define PRINTF printf
 #endif
 
-struct suspend_never_prt {
-  bool await_ready() const noexcept { return true; }
-  void await_suspend(coro::coroutine_handle<>) const noexcept
-    { PRINT ("susp-never-susp"); }
-  void await_resume() const noexcept { PRINT ("susp-never-resume");}
-};
-
-/* NOTE: this has a DTOR to test that pathway.  */
-struct  suspend_always_prt {
-  bool await_ready() const noexcept { return false; }
-  void await_suspend(coro::coroutine_handle<>) const noexcept
-    { PRINT ("susp-always-susp"); }
-  void await_resume() const noexcept { PRINT ("susp-always-resume"); }
-  ~suspend_always_prt() { PRINT ("susp-always-DTOR"); }
-};
-
-template <typename T>
 struct coro1 {
   struct promise_type;
   using handle_type = coro::coroutine_handle<coro1::promise_type>;
@@ -51,7 +31,7 @@ struct coro1 {
   coro1 () : handle(0) {}
   coro1 (handle_type _handle)
     : handle(_handle) {
-    PRINT("Created coro1 object from handle");
+        PRINT("Created coro1 object from handle");
   }
   coro1 (const coro1 &) = delete; // no copying
   coro1 (coro1 &&s) : handle(s.handle) {
@@ -70,8 +50,22 @@ struct coro1 {
       handle.destroy();
   }
 
+  struct suspend_never_prt {
+    bool await_ready() const noexcept { return true; }
+    void await_suspend(handle_type) const noexcept { PRINT ("susp-never-susp"); }
+    void await_resume() const noexcept { PRINT ("susp-never-resume");}
+  };
+
+  /* NOTE: this has a DTOR to test that pathway.  */
+  struct  suspend_always_prt {
+    bool await_ready() const noexcept { return false; }
+    void await_suspend(handle_type) const noexcept { PRINT ("susp-always-susp"); }
+    void await_resume() const noexcept { PRINT ("susp-always-resume"); }
+    ~suspend_always_prt() { PRINT ("susp-always-DTOR"); }
+  };
+
   struct promise_type {
-  T value;
+  int value;
   promise_type() {  PRINT ("Created Promise"); }
   ~promise_type() { PRINT ("Destroyed Promise"); }
 
@@ -79,55 +73,71 @@ struct coro1 {
     PRINT ("get_return_object: handle from promise");
     return handle_type::from_promise (*this);
   }
-#ifdef BROKEN
-  auto initial_suspend () const {
-#else
-  suspend_always_prt initial_suspend () const {
-#endif
+  auto initial_suspend () {
     PRINT ("get initial_suspend (always)");
     return suspend_always_prt{};
   }
-#ifdef BROKEN
-  auto final_suspend () const {
-#else
-  suspend_always_prt final_suspend () const {
-#endif
+  auto final_suspend () {
     PRINT ("get final_suspend (always)");
     return suspend_always_prt{};
   }
-  void return_value (T v) {
+  void return_value (int v) {
     PRINTF ("return_value () %d\n",v);
     value = v;
   }
-  T get_value (void) { return value; }
+  auto yield_value (int v) {
+    PRINTF ("yield_value () %d and suspend always\n",v);
+    value = v;
+    return suspend_always_prt{};
+  }
+  /* Some non-matching overloads.  */
+  auto yield_value (suspend_always_prt s, int x) {
+    return s;
+  }
+  auto yield_value (void) {
+    return 42;
+  }
+  int get_value (void) { return value; }
   // Placeholder to satisfy parser, not doing exceptions yet.
   void unhandled_exception() {  /*exit(1);*/ }
   };
 };
 
-coro1<float> f () noexcept
+struct coro1 f () noexcept
 {
-  PRINT ("coro1: about to return");
-  co_return (float) 42;
+  PRINT ("f: about to yield 42");
+  co_yield 42;
+
+  PRINT ("f: about to return 6174");
+  co_return 6174;
 }
 
 int main ()
 {
   PRINT ("main: create coro1");
-  coro1<float> x = f ();
-  PRINT ("main: got coro1 - resuming");
+  struct coro1 x = f ();
+  PRINT ("main: got coro1 - resuming (1)");
   if (x.handle.done())
     abort();
   x.handle.resume();
-  PRINT ("main: after resume");
+  PRINT ("main: after resume (1)");
   int y = x.handle.promise().get_value();
-  if ( y != (float)42 )
+  if ( y != 42 )
     abort ();
+  PRINT ("main: apparently got 42");
+  PRINT ("main: got coro1 - resuming (2)");
+  if (x.handle.done())
+    abort();
+  x.handle.resume();
+  PRINT ("main: after resume (2)");
+  y = x.handle.promise().get_value();
+  if ( y != 6174 )
+    abort ();
+  PRINT ("main: apparently got 6174");
   if (!x.handle.done())
     {
       PRINT ("main: apparently not done...");
       abort ();
-      //x.handle.resume();
     }
   PRINT ("main: returning");
   return 0;

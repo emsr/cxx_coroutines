@@ -1,4 +1,4 @@
-//  { dg-additional-options "-fsyntax-only" }
+//  { dg-additional-options "-fsyntax-only " }
 
 typedef __SIZE_TYPE__ size_t;
 

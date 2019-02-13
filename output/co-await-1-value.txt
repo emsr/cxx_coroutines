@@ -1,0 +1,4 @@
+Created coro1 object from handle
+susp-always-susp-int
+susp-always-resume-int
+main: done
