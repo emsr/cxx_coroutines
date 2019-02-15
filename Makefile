@@ -59,45 +59,73 @@ all: $(BIN_DIR) \
 
 $(BIN_DIR)/co-await-0-triv: testsuite/torture/co-await-0-triv.C
 	$(CXX) -o $(BIN_DIR)/co-await-0-triv testsuite/torture/co-await-0-triv.C
+test_co-await-0-triv: $(BIN_DIR)/co-await-0-triv
+	$(BIN_DIR)/test_co-await-0-triv > output/test_co-await-0-triv.txt
 
 $(BIN_DIR)/co-await-1-value: testsuite/torture/co-await-1-value.C
 	$(CXX) -o $(BIN_DIR)/co-await-1-value testsuite/torture/co-await-1-value.C
+test_co-await-1-value: $(BIN_DIR)/co-await-1-value
+	$(BIN_DIR)/co-await-1-value > output/co-await-1-value.txt
 
 $(BIN_DIR)/co-await-2-xform: testsuite/torture/co-await-2-xform.C
 	$(CXX) -o $(BIN_DIR)/co-await-2-xform testsuite/torture/co-await-2-xform.C
+test_co-await-2-xform: $(BIN_DIR)/co-await-2-xform
+	$(BIN_DIR)/co-await-2-xform > output/co-await-2-xform.txt
 
 $(BIN_DIR)/co-await-3-rhs-op: testsuite/torture/co-await-3-rhs-op.C
 	$(CXX) -o $(BIN_DIR)/co-await-3-rhs-op testsuite/torture/co-await-3-rhs-op.C
+test_co-await-3-rhs-op: $(BIN_DIR)/co-await-3-rhs-op
+	$(BIN_DIR)/co-await-3-rhs-op > output/co-await-3-rhs-op.txt
 
 $(BIN_DIR)/co-await-4-control-flow: testsuite/torture/co-await-4-control-flow.C
 	$(CXX) -o $(BIN_DIR)/co-await-4-control-flow testsuite/torture/co-await-4-control-flow.C
+test_co-await-4-control-flow: $(BIN_DIR)/co-await-4-control-flow
+	$(BIN_DIR)/co-await-4-control-flow > output/co-await-4-control-flow.txt
 
 $(BIN_DIR)/co-await-5-loop: testsuite/torture/co-await-5-loop.C
 	$(CXX) -o $(BIN_DIR)/co-await-5-loop testsuite/torture/co-await-5-loop.C
+test_co-await-5-loop: $(BIN_DIR)/co-await-5-loop
+	$(BIN_DIR)/co-await-5-loop > output/co-await-5-loop.txt
 
 $(BIN_DIR)/co-await-6-ovl: testsuite/torture/co-await-6-ovl.C
 	$(CXX) -o $(BIN_DIR)/co-await-6-ovl testsuite/torture/co-await-6-ovl.C
+test_co-await-6-ovl: $(BIN_DIR)/co-await-6-ovl
+	$(BIN_DIR)/co-await-6-ovl > output/co-await-6-ovl.txt
 
 $(BIN_DIR)/co-ret-3: testsuite/torture/co-ret-3.C
 	$(CXX) -o $(BIN_DIR)/co-ret-3 testsuite/torture/co-ret-3.C
+test_co-ret-3: $(BIN_DIR)/co-ret-3
+	$(BIN_DIR)/co-ret-3 > output/co-ret-3.txt
 
 $(BIN_DIR)/co-ret-4: testsuite/torture/co-ret-4.C
 	$(CXX) -o $(BIN_DIR)/co-ret-4 testsuite/torture/co-ret-4.C
+test_co-ret-4: $(BIN_DIR)/co-ret-4
+	$(BIN_DIR)/co-ret-4 > output/co-ret-4.txt
 
 $(BIN_DIR)/co-ret-5: testsuite/torture/co-ret-5.C
 	$(CXX) -o $(BIN_DIR)/co-ret-5 testsuite/torture/co-ret-5.C
+test_co-ret-5: $(BIN_DIR)/co-ret-5
+	$(BIN_DIR)/co-ret-5 > output/co-ret-5.txt
 
 $(BIN_DIR)/co-ret-6: testsuite/torture/co-ret-6.C
 	$(CXX) -o $(BIN_DIR)/co-ret-6 testsuite/torture/co-ret-6.C
+test_co-ret-6: $(BIN_DIR)/co-ret-6
+	$(BIN_DIR)/co-ret-6 > output/co-ret-6.txt
 
 $(BIN_DIR)/co-ret-7: testsuite/torture/co-ret-7.C
 	$(CXX) -o $(BIN_DIR)/co-ret-7 testsuite/torture/co-ret-7.C
+test_co-ret-7: $(BIN_DIR)/co-ret-7
+	$(BIN_DIR)/co-ret-7 > output/co-ret-7.txt
 
 $(BIN_DIR)/co-ret-void-is-ready: testsuite/torture/co-ret-void-is-ready.C
 	$(CXX) -o $(BIN_DIR)/co-ret-void-is-ready testsuite/torture/co-ret-void-is-ready.C
+test_co-ret-void-is-ready: $(BIN_DIR)/co-ret-void-is-ready
+	$(BIN_DIR)/co-ret-void-is-ready > output/co-ret-void-is-ready.txt
 
 $(BIN_DIR)/co-ret-void-is-suspend: testsuite/torture/co-ret-void-is-suspend.C
 	$(CXX) -o $(BIN_DIR)/co-ret-void-is-suspend testsuite/torture/co-ret-void-is-suspend.C
+test_co-ret-void-is-suspend: $(BIN_DIR)/co-ret-void-is-suspend
+	$(BIN_DIR)/co-ret-void-is-suspend > output/co-ret-void-is-suspend.txt
 
 $(BIN_DIR)/coro-auto-fn: testsuite/coro-auto-fn.C
 	$(CXX) -fsyntax-only -w testsuite/coro-auto-fn.C
@@ -140,12 +168,18 @@ $(BIN_DIR)/coro-pre-proc.o: testsuite/coro-pre-proc.C
 
 $(BIN_DIR)/co-yield-0-triv: testsuite/torture/co-yield-0-triv.C
 	$(CXX) -o $(BIN_DIR)/co-yield-0-triv testsuite/torture/co-yield-0-triv.C
+test_co-yield-0-triv: $(BIN_DIR)/co-yield-0-triv
+	$(BIN_DIR)/co-yield-0-triv > output/co-yield-0-triv.txt
 
 $(BIN_DIR)/co-yield-1-multi: testsuite/torture/co-yield-1-multi.C
 	$(CXX) -o $(BIN_DIR)/co-yield-1-multi testsuite/torture/co-yield-1-multi.C
+test_co-yield-1-multi: $(BIN_DIR)/co-yield-1-multi
+	$(BIN_DIR)/co-yield-1-multi > output/co-yield-1-multi.txt
 
 $(BIN_DIR)/co-yield-2-loop: testsuite/torture/co-yield-2-loop.C
 	$(CXX) -o $(BIN_DIR)/co-yield-2-loop testsuite/torture/co-yield-2-loop.C
+test_co-yield-2-loop: $(BIN_DIR)/co-yield-2-loop
+	$(BIN_DIR)/co-yield-2-loop > output/co-yield-2-loop.txt
 
 $(BIN_DIR)/co-yield-syntax-1: testsuite/co-yield-syntax-1.C
 	$(CXX) -fsyntax-only -w testsuite/co-yield-syntax-1.C
@@ -157,23 +191,23 @@ $(BIN_DIR)/co-yield-syntax-3: testsuite/co-yield-syntax-3.C
 	$(CXX) -fsyntax-only -w testsuite/co-yield-syntax-3.C
 
 
-test: $(EXES)
-	./$(BIN_DIR)/co-await-0-triv > output/co-await-0-triv.txt
-	./$(BIN_DIR)/co-await-1-value > output/co-await-1-value.txt
-	./$(BIN_DIR)/co-await-2-xform > output/co-await-2-xform.txt
-	./$(BIN_DIR)/co-await-3-rhs-op > output/co-await-3-rhs-op.txt
-	./$(BIN_DIR)/co-await-4-control-flow > output/co-await-4-control-flow.txt
-	./$(BIN_DIR)/co-await-5-loop > output/co-await-5-loop.txt
-	./$(BIN_DIR)/co-await-6-ovl > output/co-await-6-ovl.txt
-	./$(BIN_DIR)/co-ret-3 > output/co-ret-3.txt
-	./$(BIN_DIR)/co-ret-4 > output/co-ret-4.txt
-	./$(BIN_DIR)/co-ret-5 > output/co-ret-5.txt
-	./$(BIN_DIR)/co-ret-6 > output/co-ret-6.txt
-	./$(BIN_DIR)/co-ret-7 > output/co-ret-7.txt
-	./$(BIN_DIR)/co-ret-void-is-ready > output/co-ret-void-is-ready.txt
-	./$(BIN_DIR)/co-yield-0-triv > output/co-yield-0-triv.txt
-	./$(BIN_DIR)/co-yield-1-multi > output/co-yield-1-multi.txt
-	./$(BIN_DIR)/co-yield-2-loop > output/co-yield-2-loop.txt
+test: \
+  test_co-await-0-triv \
+  test_co-await-1-value \
+  test_co-await-2-xform \
+  test_co-await-3-rhs-op \
+  test_co-await-4-control-flow \
+  test_co-await-5-loop > output \
+  test_co-await-6-ovl > output \
+  test_co-ret-3 \
+  test_co-ret-4 \
+  test_co-ret-5 \
+  test_co-ret-6 \
+  test_co-ret-7 \
+  test_co-ret-void-is-ready \
+  test_co-yield-0-triv \
+  test_co-yield-1-multi \
+  test_co-yield-2-loop
 
 
 clean:
