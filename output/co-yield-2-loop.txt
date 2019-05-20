@@ -1,0 +1,45 @@
+main: create coro1
+Created Promise
+get_return_object: handle from promise
+get initial_suspend (always)
+susp-always-susp
+Created coro1 object from handle
+main: got coro1 - resuming (1)
+susp-always-resume
+susp-always-DTOR
+f: about to yield 5
+yield_value () 5 and suspend always
+susp-always-susp
+main: after resume (1)
+main: gX OK -- looping
+susp-always-resume
+susp-always-DTOR
+f: about to yield 6
+yield_value () 6 and suspend always
+susp-always-susp
+susp-always-resume
+susp-always-DTOR
+f: about to yield 7
+yield_value () 7 and suspend always
+susp-always-susp
+susp-always-resume
+susp-always-DTOR
+f: about to yield 8
+yield_value () 8 and suspend always
+susp-always-susp
+susp-always-resume
+susp-always-DTOR
+f: about to yield 9
+yield_value () 9 and suspend always
+susp-always-susp
+susp-always-resume
+susp-always-DTOR
+f: about to return 6174
+return_value () 6174
+get final_suspend (always)
+susp-always-susp
+main: apparently got 6174
+main: returning
+Destroyed coro1
+susp-always-DTOR
+Destroyed Promise

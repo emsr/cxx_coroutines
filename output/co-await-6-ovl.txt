@@ -1,1 +1,17 @@
+main: create coro1
+Created Promise
+get_return_object: from handle from promise
+Created coro1 object from handle
+get initial_suspend 
+susp-never-resume
+susp-always-susp
+Moved coro1
+main: got coro1 - checking gX
+main: resuming [1]
+susp-always-resume
+return_value () 11
+get final_suspend
+susp-always-susp
 main: done
+Destroyed coro1
+Destroyed Promise

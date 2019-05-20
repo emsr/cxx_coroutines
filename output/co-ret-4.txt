@@ -1,0 +1,18 @@
+main: create coro1
+Created Promise
+get_return_object: handle from promise
+Created nontriv object from handle
+get initial_suspend (always)
+susp-always-susp
+Created coro1 object from nontriv
+Destroyed nontriv
+main: got coro1 - resuming
+susp-always-resume
+coro1: about to return
+return_void ()
+get final_suspend (always)
+susp-always-susp
+main: after resume
+main: returning
+Destroyed coro1
+Destroyed Promise

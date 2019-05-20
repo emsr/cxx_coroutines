@@ -1,0 +1,15 @@
+main: create coro1
+Created Promise
+get_return_object: from handle from promise
+Created coro1 object from handle
+get initial_suspend (never) 
+susp-never-resume
+coro1: about to return
+return_void ()
+get final_suspend (always) 
+susp-always-susp
+coro1 mv ctor 
+main: got coro1 - should be done
+main: returning
+Destroyed coro1
+Destroyed Promise

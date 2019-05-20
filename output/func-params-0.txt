@@ -1,16 +1,18 @@
 main: create coro1
-Created Promise
+Created Promise with 555
 get_return_object: handle from promise
 get initial_suspend (always)
 susp-always-susp
 Created coro1 object from handle
-main: got coro1 - resuming
+main: after coro1 ctor 555 - now resuming
 susp-always-resume
+susp-always-DTOR
 coro1: about to return
-return_void ()
+return_value () 42
 get final_suspend (always)
 susp-always-susp
 main: after resume
 main: returning
 Destroyed coro1
+susp-always-DTOR
 Destroyed Promise

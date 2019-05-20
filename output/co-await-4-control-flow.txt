@@ -1,1 +1,20 @@
+main: create coro1
+Created Promise
+get_return_object: from handle from promise
+Created coro1 object from handle
+get initial_suspend 
+susp-never-resume
+await_transform an int () 11
+suspend_always_intprt ctor with 11
+susp-always-susp-int
+Moved coro1
+main: got coro1 - checking gX
+main: gX is wrong : 31, should be 1
+main: gX OK -- looping
+susp-always-resume-int
+return_value () 42
+get final_suspend
+susp-always-susp
 main: done
+Destroyed coro1
+Destroyed Promise

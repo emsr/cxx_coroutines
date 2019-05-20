@@ -1,0 +1,19 @@
+main: create coro1
+Created Promise
+get_return_object: handle from promise
+get initial_suspend (always)
+susp-always-susp
+Created coro1 object from handle
+main: got coro1 - resuming
+susp-always-resume
+susp-always-dtor
+coro1: about to return
+called the int fn foo
+return_void ()
+get final_suspend (always)
+susp-always-susp
+main: after resume
+main: returning
+Destroyed coro1
+susp-always-dtor
+Destroyed Promise

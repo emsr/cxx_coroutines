@@ -1,5 +1,5 @@
 
-CXX = $(HOME)/bin_coroutines/bin/g++ -std=c++17 -fcoroutines -g
+CXX = $(HOME)/bin_coroutines/bin/g++ -std=c++2a -fcoroutines -fno-exceptions -g -DOUTPUT
 
 BIN_DIR = bin
 
@@ -20,7 +20,8 @@ EXES = \
   $(BIN_DIR)/co-ret-void-is-suspend \
   $(BIN_DIR)/co-yield-0-triv \
   $(BIN_DIR)/co-yield-1-multi \
-  $(BIN_DIR)/co-yield-2-loop
+  $(BIN_DIR)/co-yield-2-loop \
+  $(BIN_DIR)/func-params-0.C
 
 all: $(BIN_DIR) \
   $(BIN_DIR)/co-await-0-triv \
@@ -60,7 +61,7 @@ all: $(BIN_DIR) \
 $(BIN_DIR)/co-await-0-triv: testsuite/torture/co-await-0-triv.C
 	$(CXX) -o $(BIN_DIR)/co-await-0-triv testsuite/torture/co-await-0-triv.C
 test_co-await-0-triv: $(BIN_DIR)/co-await-0-triv
-	$(BIN_DIR)/test_co-await-0-triv > output/test_co-await-0-triv.txt
+	$(BIN_DIR)/co-await-0-triv > output/test_co-await-0-triv.txt
 
 $(BIN_DIR)/co-await-1-value: testsuite/torture/co-await-1-value.C
 	$(CXX) -o $(BIN_DIR)/co-await-1-value testsuite/torture/co-await-1-value.C
@@ -190,6 +191,11 @@ $(BIN_DIR)/co-yield-syntax-2: testsuite/co-yield-syntax-2.C
 $(BIN_DIR)/co-yield-syntax-3: testsuite/co-yield-syntax-3.C
 	$(CXX) -fsyntax-only -w testsuite/co-yield-syntax-3.C
 
+$(BIN_DIR)/func-params-0: testsuite/torture/func-params-0.C
+	$(CXX) -o $(BIN_DIR)/func-params-0 testsuite/torture/func-params-0.C
+test_func-params-0: $(BIN_DIR)/func-params-0
+	$(BIN_DIR)/func-params-0 > output/func-params-0.txt
+
 
 test: \
   test_co-await-0-triv \
@@ -207,7 +213,8 @@ test: \
   test_co-ret-void-is-ready \
   test_co-yield-0-triv \
   test_co-yield-1-multi \
-  test_co-yield-2-loop
+  test_co-yield-2-loop \
+  test_func-params-0
 
 
 clean:
